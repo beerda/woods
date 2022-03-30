@@ -1,0 +1,11 @@
+Package: woods
+Title: Experimental R Package for Double Random Forests
+Version: 0.0.0.9000
+Authors@R: 
+    person("Michal", "Burda", , "michal.burda@osu.cz", role = c("aut", "cre"),
+           comment = c(ORCID = "000-0002-4182-4407"))
+Description: Classification with double random forests
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
