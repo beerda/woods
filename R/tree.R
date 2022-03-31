@@ -8,7 +8,7 @@ tree <- function(data, cfg) {
 
 
 leaf_node <- function(data, cfg) {
-    list(result = cfg$create_classification(data))
+    list(result = cfg$create_result(data))
 }
 
 

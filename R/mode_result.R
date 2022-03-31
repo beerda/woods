@@ -2,7 +2,7 @@
 #' @return
 #' @author Michal Burda
 #' @export
-mode_classification <- function(data) {
+mode_result <- function(data) {
     uniq <- unique(data$y)
     value <- uniq[which.max(tabulate(match(data$y, uniq)))]
 

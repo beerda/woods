@@ -11,6 +11,7 @@ woods.default <- function(y,
                           node_size = 1) {
     assert_that(is.count(n_tree))
     assert_that(is.na(max_height) || is.count(max_height))
+    assert_that(is.count(node_size))
 
     data <- list(y = y, x = x)
 
@@ -19,7 +20,7 @@ woods.default <- function(y,
                 prepare_tree_data = identity,
                 prepare_node_data = identity,
                 find_best_split = random_split,
-                create_classification = mode_classification)
+                create_result = mode_result)
 
     model <- lapply(seq_len(n_tree), function(i) tree(data, cfg))
 
