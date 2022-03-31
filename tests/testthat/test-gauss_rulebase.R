@@ -1,0 +1,16 @@
+test_that("gauss_rulebase", {
+    rb <- gauss_rulebase(n_inputs = 2, n_parts = 3)
+
+    expect_true(is.gauss_rulebase(rb))
+    expect_true(is.list(rb))
+    expect_equal(rb$n_inputs, 2)
+    expect_equal(rb$n_parts, 3)
+    expect_equal(nrow(rb$means), 2)
+    expect_equal(ncol(rb$means), 3)
+    expect_equal(nrow(rb$stdevs), 2)
+    expect_equal(ncol(rb$stdevs), 3)
+    expect_equal(nrow(rb$antecedents), 3^2)
+    expect_equal(ncol(rb$antecedents), 2)
+    expect_equal(nrow(rb$consequents), 2 + 1)
+    expect_equal(ncol(rb$consequents), 3^2)
+})
