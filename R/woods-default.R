@@ -13,7 +13,7 @@ woods.default <- function(y,
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
 
-    data <- list(y = y, x = x)
+    data <- woods_data(y = y, x = x)
 
     cfg <- list(max_height = max_height,
                 node_size = node_size,
