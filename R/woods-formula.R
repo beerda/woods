@@ -21,7 +21,9 @@ woods.formula <- function(formula,
     y <- model.response(mf)
     attr(y, 'na.action') <- attr(mf, 'na.action')
 
-    mf <- model.frame(terms(reformulate(attributes(mt)$term.labels, response = )),
+    mf <- model.frame(terms(reformulate(attributes(mt)$term.labels,
+                                        response = NULL,
+                                        intercept = FALSE)),
                       data.frame(mf))
 
     res <- woods.default(y, mf, ...)
