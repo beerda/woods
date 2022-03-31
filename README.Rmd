@@ -7,6 +7,8 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
+set.seed(2350)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -27,4 +29,31 @@ To install the development version from GitHub, type the following commands with
 ```{r gh-installation, eval = FALSE}
 install.packages("devtools")
 devtools::install_github("beerda/woods")
+```
+
+
+## Usage
+
+Firstly, load the package to start using the `woods` library:
+```{r}
+library(woods)
+```
+
+Then create some input data:
+
+```{r}
+d <- data.frame(y = 1:5, a = 2 * (1:5), b = 3 * (1:5))
+print(d)
+```
+
+To train the `woods` model with columns `a`, `b` being the independent variables and `y` being the target, the following command has to be executed:
+
+```{r}
+fit <- woods(y ~ a + b, data = d)
+```
+
+So far, the algorithm creates only some random output:
+
+```{r}
+print(fit)
 ```
