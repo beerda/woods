@@ -12,5 +12,5 @@ commands within the R session:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("beerda/lfl")
+devtools::install_github("beerda/woods")
 ```

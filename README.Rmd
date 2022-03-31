@@ -26,5 +26,5 @@ To install the development version from GitHub, type the following commands with
 
 ```{r gh-installation, eval = FALSE}
 install.packages("devtools")
-devtools::install_github("beerda/lfl")
+devtools::install_github("beerda/woods")
 ```
