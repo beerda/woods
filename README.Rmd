@@ -1,0 +1,30 @@
+---
+output:
+  github_document:
+    html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+
+# woods
+
+Experimental R package for double random forests
+
+
+## Installation
+
+To install the development version from GitHub, type the following commands within the R session:
+
+```{r gh-installation, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("beerda/lfl")
+```
