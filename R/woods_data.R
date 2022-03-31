@@ -12,3 +12,18 @@ woods_data <- function(y, x) {
     structure(list(y = y, x = x),
               class = 'woods_data')
 }
+
+
+#' @export
+is.woods_data <- function(x) {
+    inherits(x, 'woods_data')
+}
+
+
+#' @export
+`[.woods_data` <- function(x, i, j, drop=FALSE) {
+    if (drop) warning('drop ignored')
+
+    woods_data(y = x$y[i],
+               x = x$x[i, j, drop=FALSE])
+}
