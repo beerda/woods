@@ -5,24 +5,34 @@
 sse_split <- function(data, cfg) {
     assert_that(is.numeric(data$y))
 
+    if (length(data$y) <= 1) {
+        return(create_sse_split(by = colnames(data$x)[1],
+                                cutpoint = data$x[[1]][1],
+                                sse = 0))
+    }
+
     splits <- lapply(colnames(data$x), function(by) {
         le <- compute_sse(data$y, data$x[[by]], FALSE)
         g <- compute_sse(data$y, data$x[[by]], TRUE)
         sse <- le$sse + g$sse
         i <- which.min(sse)
         cutpoint <- le$x[i]
-
-        structure(list(label = paste(by, '<=', cutpoint),
-                       by = by,
-                       cutpoint = cutpoint,
-                       sse = sse[i]),
-                  class = 'sse_split')
+        create_sse_split(by, cutpoint, sse[i])
     })
 
     sse <- sapply(splits, function(s) s$sse)
     best <- which.min(sse)
 
     splits[[best]]
+}
+
+
+create_sse_split <- function(by, cutpoint, sse) {
+    structure(list(label = paste(by, '<=', cutpoint),
+                   by = by,
+                   cutpoint = cutpoint,
+                   sse = sse),
+              class = 'sse_split')
 }
 
 

@@ -32,3 +32,16 @@ test_that("sse_split", {
     expect_equal(res$sse, expected[best])
     expect_equal(res$label, paste('x <=', x[best]))
 })
+
+
+test_that("sse_split trivial cases", {
+    res <- sse_split(woods_data(y = 1, x = data.frame(x = 1)),
+                     list())
+
+    expect_true(is.list(res))
+    expect_true(inherits(res, 'sse_split'))
+    expect_equal(res$by, 'x')
+    expect_equal(res$cutpoint, 1)
+    expect_equal(res$sse, 0)
+    expect_equal(res$label, 'x <= 1')
+})
