@@ -33,5 +33,5 @@ gauss_firing <- function(rulebase, inputs) {
 
 # Compute the value of the linear functions in the consequents of the rulebase
 gauss_consequent <- function(rulebase, inputs) {
-    as.vector(c(1, inputs) %*% rulebase$consequents)
+    as.vector(c(1, inputs) %*% rulebase$consequents) # 1 is for intercept
 }

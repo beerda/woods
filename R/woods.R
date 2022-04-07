@@ -64,10 +64,10 @@ woods.default <- function(y,
 
     cfg <- list(max_height = max_height,
                 node_size = node_size,
-                prepare_tree_data = identity,
-                prepare_node_data = resampling_factory(cols = mtry),
-                find_best_split = random_split,
-                create_result = mode_result)
+                prepare_tree_data = resampling_factory(cols = mtry),
+                prepare_node_data = identity,
+                find_best_split = sse_split,
+                create_result = mean_result)
 
     model <- lapply(seq_len(n_tree), function(i) tree(data, cfg))
 
