@@ -7,6 +7,6 @@
 mean_result <- function(data) {
     value <- mean(data$y)
 
-    list(label = paste('mean', value),
+    list(label = paste(value, '(mean)'),
          value = value)
 }
