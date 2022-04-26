@@ -63,24 +63,29 @@ woods.default <- function(y,
     data <- woods_data(y = y, x = x)
 
     if (is.numeric(data$y)) {
+        find_best_split <- sse_split
         create_result <- mean_result
         leaf_type <- 'mean'
+        split_type <- 'sum of squared error'
     } else {
+        find_best_split <- ig_split
         create_result <- mode_result
         leaf_type <- 'mode'
+        split_type <- 'information gain'
     }
 
     cfg <- list(max_height = max_height,
                 node_size = node_size,
                 prepare_tree_data = resampling_factory(cols = mtry),
                 prepare_node_data = identity,
-                find_best_split = sse_split,
+                find_best_split = find_best_split,
                 create_result = create_result)
 
     model <- lapply(seq_len(n_tree), function(i) tree(data, cfg))
 
     structure(list(call = match.call(),
                    model = model,
+                   split_type = split_type,
                    leaf_type = leaf_type),
               class = 'woods')
 }
@@ -91,8 +96,10 @@ woods.default <- function(y,
 #' @author Michal Burda
 #' @export
 print.woods <- function(x, ...) {
-    cat('Call:\n')
+    cat('Call: ')
     print(x$call)
+    cat('Split: ', x$split_type, '\n', sep = '')
+    cat('Leaves: ', x$leaf_type, '\n', sep = '')
     cat('\nModel:\n')
     print(x$model)
 }
