@@ -62,17 +62,26 @@ woods.default <- function(y,
 
     data <- woods_data(y = y, x = x)
 
+    if (is.numeric(data$y)) {
+        create_result <- mean_result
+        leaf_type <- 'mean'
+    } else {
+        create_result <- mode_result
+        leaf_type <- 'mode'
+    }
+
     cfg <- list(max_height = max_height,
                 node_size = node_size,
                 prepare_tree_data = resampling_factory(cols = mtry),
                 prepare_node_data = identity,
                 find_best_split = sse_split,
-                create_result = mean_result)
+                create_result = create_result)
 
     model <- lapply(seq_len(n_tree), function(i) tree(data, cfg))
 
     structure(list(call = match.call(),
-                   model = model),
+                   model = model,
+                   leaf_type = leaf_type),
               class = 'woods')
 }
 
