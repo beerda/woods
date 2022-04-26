@@ -6,9 +6,9 @@
 #' @seealso https://scientistcafe.com/ids/splitting-criteria.html
 ig_split <- function(data, cfg) {
     if (length(data$y) <= 1) {
-        return(create_igr_split(by = colnames(data$x)[1],
-                                value = data$x[[1]][1],
-                                igr = 0))
+        return(create_ig_split(by = colnames(data$x)[1],
+                               cutpoint = data$x[[1]][1],
+                               ig = 0))
     }
 
     splits <- lapply(colnames(data$x), function(by) {

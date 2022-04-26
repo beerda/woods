@@ -51,3 +51,16 @@ test_that("ig_split", {
     expect_equal(res$ig, expected[best])
     expect_equal(res$label, paste('x <=', x[best]))
 })
+
+
+test_that("ig_split trivial cases", {
+    res <- ig_split(woods_data(y = 1, x = data.frame(x = 1)),
+                    list())
+
+    expect_true(is.list(res))
+    expect_true(inherits(res, 'ig_split'))
+    expect_equal(res$by, 'x')
+    expect_equal(res$cutpoint, 1)
+    expect_equal(res$ig, 0)
+    expect_equal(res$label, 'x <= 1')
+})
