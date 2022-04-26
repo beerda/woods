@@ -6,7 +6,7 @@
 #' @author Michal Burda
 #' @export
 woods_data <- function(y, x) {
-    assert_that(is.vector(y))
+    assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
 
     # ensure colnames exist
