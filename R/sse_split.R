@@ -46,7 +46,6 @@ compute_sse <- function(y, x, decreasing) {
     model$cumsum_ysq <- cumsum(model$ysq)
     model$count <- seq_len(nrow(model))
     model$mean <- model$cumsum_y / model$count
-    last <- model[nrow(model), , drop = FALSE]
 
     model$sse <- model$cumsum_ysq  - 2 * model$mean * model$cumsum_y + model$mean^2 * model$count
     if (decreasing) {
