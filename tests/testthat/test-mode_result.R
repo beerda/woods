@@ -4,6 +4,6 @@ test_that("mode_result", {
 
     r <- mode_result(d)
     expect_true(is.list(r))
-    expect_equal(r$label, 'mode 2')
+    expect_equal(r$label, '2 (mode)')
     expect_equal(r$value, 2)
 })
