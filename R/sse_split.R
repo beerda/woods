@@ -1,7 +1,9 @@
+#' Tree node split based on the Sum of Squared Error (SSE)
 #'
 #' @return
 #' @author Michal Burda
 #' @export
+#' @seealso https://scientistcafe.com/ids/splitting-criteria.html
 sse_split <- function(data, cfg) {
     assert_that(is.numeric(data$y))
 
