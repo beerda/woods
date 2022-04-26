@@ -50,10 +50,12 @@ To train the `woods` model with columns `a`, `b` being the independent variables
 
 ```{r}
 fit <- woods(y ~ a + b, data = d)
+print(fit)
 ```
 
-So far, the algorithm creates only some random output:
+Analogously we run the algorithm e.g. on iris dataset:
 
 ```{r}
+fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, node_size = 5)
 print(fit)
 ```

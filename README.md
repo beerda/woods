@@ -47,27 +47,59 @@ executed:
 
 ``` r
 fit <- woods(y ~ a + b, data = d)
-```
-
-So far, the algorithm creates only some random output:
-
-``` r
 print(fit)
-#> Call:
-#> woods.formula(formula = y ~ a + b, data = d)
+#> Call: woods.formula(formula = y ~ a + b, data = d)
+#> Split: sum of squared error
+#> Leaves: mean
 #> 
 #> Model:
 #> [[1]]
-#> a <= 6
-#>  a <= 2
-#>      mode 1
-#>      mode 2
-#>  b <= 12
-#>      mode 4
-#>      mode 5
+#> a <= 6 (sse_split)
+#>  a <= 2 (sse_split)
+#>      1 (mean)
+#>      3 (mean)
+#>  5 (mean)
 #> 
 #> [[2]]
-#> a <= 6
-#>  mode 1
-#>  mode 4
+#> b <= 9 (sse_split)
+#>  b <= 3 (sse_split)
+#>      1 (mean)
+#>      3 (mean)
+#>  5 (mean)
+```
+
+Analogously we run the algorithm e.g. on iris dataset:
+
+``` r
+fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, node_size = 5)
+print(fit)
+#> Call: woods.formula(formula = Species ~ Sepal.Length + Sepal.Width, 
+#>     data = iris, node_size = 5)
+#> Split: information gain
+#> Leaves: mode
+#> 
+#> Model:
+#> [[1]]
+#> Sepal.Length <= 5.7 (ig_split)
+#>  setosa (mode, n=71)
+#>  Sepal.Width <= 3.2 (ig_split)
+#>      Sepal.Length <= 5.8 (ig_split)
+#>          versicolor (mode, n=5)
+#>          virginica (mode, n=58)
+#>      Sepal.Length <= 5.8 (ig_split)
+#>          setosa (mode, n=5)
+#>          Sepal.Length <= 6.3 (ig_split)
+#>              virginica (mode, n=5)
+#>              virginica (mode, n=6)
+#> 
+#> [[2]]
+#> Sepal.Length <= 5.6 (ig_split)
+#>  Sepal.Width <= 2.8 (ig_split)
+#>      versicolor (mode, n=17)
+#>      setosa (mode, n=53)
+#>  Sepal.Length <= 5.7 (ig_split)
+#>      versicolor (mode, n=9)
+#>      Sepal.Length <= 5.8 (ig_split)
+#>          virginica (mode, n=5)
+#>          virginica (mode, n=66)
 ```
