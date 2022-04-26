@@ -9,7 +9,38 @@ woods_data <- function(y, x) {
     assert_that(is.vector(y))
     assert_that(is.data.frame(x))
 
-    structure(list(y = y, x = x),
+    # ensure colnames exist
+    if (is.null(colnames(x))) {
+        colnames(x) <- paste0('col.', seq_along(x))
+    }
+
+    # make all x's columns numeric
+    df <- list()
+    for (i in colnames(x)) {
+        v <- x[[i]]
+        if (is.numeric(v)) {
+            df[[i]] <- v
+        } else if (is.logical(v) || is.ordered(v)) {
+            df[[i]] <- as.integer(v)
+        } else if (is.factor(v)) {
+            for (l in levels(v)) {
+                name <- paste(i, l, sep = '.')
+                if (name %in% names(df)) {
+                    stop('Cannot dichotomize factor "', i, '": ', ' column "', name, '" already exists')
+                }
+                df[[name]] <- as.integer(v == l)
+            }
+        } else {
+            stop('Cannot convert the column "', i, '" to numeric')
+        }
+    }
+    df <- as.data.frame(df)
+    attr(df, 'row.names') <- attr(x, 'row.names')
+
+    # ensure colnames are unique
+    assert_that(all(!duplicated(colnames(x))))
+
+    structure(list(y = y, x = df),
               class = 'woods_data')
 }
 
