@@ -12,6 +12,9 @@ sse(x)
 \description{
 Compute Sum of Squared Error (SSE)
 }
+\seealso{
+https://scientistcafe.com/ids/splitting-criteria.html
+}
 \author{
 Michal Burda
 }
