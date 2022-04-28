@@ -1,6 +1,6 @@
 test_that('igr_condition', {
     x <- c(1, 2, 3, 4, 5)
-    y <- c(T, T, F, T, F)
+    y <- factor(c(T, T, F, T, F))
 
     igfun <- function(i) {
         e1 <- entropy(y[1:i])
@@ -10,6 +10,7 @@ test_that('igr_condition', {
             e2 <- 0
         }
         x <- c(rep(1, i), rep(2, 5 - i))
+        x <- factor(x, levels = 1:2)
         si <- entropy(x)
         ratio <- i / length(y)
         e <- ratio * e1 + (1 - ratio) * e2
