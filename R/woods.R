@@ -60,15 +60,19 @@ woods.default <- function(y,
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
 
+    if (!is.numeric(y)) {
+        y <- factor(y)
+    }
+
     data <- woods_data(y = y, x = x)
 
     if (is.numeric(data$y)) {
-        find_best_split <- sse_split
+        find_best_split <- sse_condition
         create_result <- mean_result
         leaf_type <- 'mean'
         split_type <- 'sum of squared error'
     } else {
-        find_best_split <- ig_split
+        find_best_split <- igr_condition
         create_result <- mode_result
         leaf_type <- 'mode'
         split_type <- 'information gain'
