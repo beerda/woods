@@ -59,3 +59,9 @@ Analogously we run the algorithm e.g. on iris dataset:
 fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, node_size = 5)
 print(fit)
 ```
+
+The fitted woods model may be used to classify the new data as follows:
+
+```{r}
+predict(fit, iris)
+```

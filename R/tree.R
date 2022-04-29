@@ -8,6 +8,14 @@ tree <- function(data, cfg) {
 
 
 #' @export
+is.tree <- function(x) {
+    inherits(x, 'tree') &&
+        is.list(x) &&
+        !is.null(root)
+}
+
+
+#' @export
 print.tree <- function(x, ...) {
     print(x$root, '')
 }

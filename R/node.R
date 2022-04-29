@@ -25,7 +25,19 @@ node <- function(data, cfg) {
 
 leaf <- function(data, cfg) {
     structure(list(result = cfg$create_result(data)),
-              class = 'node')
+              class = c('node', 'leaf'))
+}
+
+
+#' @export
+is.node <- function(x) {
+    inherits(x, 'node')
+}
+
+
+#' @export
+is.leafnode <- function(x) {
+    inherits(x, 'node') && inherits(x, 'leaf')
 }
 
 

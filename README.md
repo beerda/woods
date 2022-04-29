@@ -99,3 +99,32 @@ print(fit)
 #>                 virginica (mode, n=6)
 #>         virginica (mode, n=8)
 ```
+
+The fitted woods model may be used to classify the new data as follows:
+
+``` r
+predict(fit, iris)
+#>   [1] setosa    setosa    setosa    setosa    setosa    setosa    setosa   
+#>   [8] setosa    setosa    setosa    setosa    setosa    setosa    setosa   
+#>  [15] setosa    setosa    setosa    setosa    virginica setosa    setosa   
+#>  [22] setosa    setosa    setosa    setosa    setosa    setosa    setosa   
+#>  [29] setosa    setosa    setosa    setosa    setosa    setosa    setosa   
+#>  [36] setosa    virginica setosa    setosa    setosa    setosa    setosa   
+#>  [43] setosa    setosa    setosa    setosa    setosa    setosa    setosa   
+#>  [50] setosa    virginica virginica virginica virginica virginica virginica
+#>  [57] virginica setosa    virginica setosa    setosa    virginica virginica
+#>  [64] virginica virginica virginica virginica virginica virginica virginica
+#>  [71] virginica virginica virginica virginica virginica virginica virginica
+#>  [78] virginica virginica virginica virginica virginica virginica virginica
+#>  [85] setosa    virginica virginica virginica virginica virginica virginica
+#>  [92] virginica virginica setosa    virginica virginica virginica virginica
+#>  [99] setosa    virginica virginica virginica virginica virginica virginica
+#> [106] virginica setosa    virginica virginica virginica virginica virginica
+#> [113] virginica virginica virginica virginica virginica virginica virginica
+#> [120] virginica virginica virginica virginica virginica virginica virginica
+#> [127] virginica virginica virginica virginica virginica virginica virginica
+#> [134] virginica virginica virginica virginica virginica virginica virginica
+#> [141] virginica virginica virginica virginica virginica virginica virginica
+#> [148] virginica virginica virginica
+#> Levels: setosa versicolor virginica
+```

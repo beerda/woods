@@ -11,3 +11,15 @@ cutpoint_condition <- function(var, cutpoint, type, criterion, ...) {
                    ...),
               class = 'cutpoint_condition')
 }
+
+
+#' @export
+is.cutpoint_condition <- function(x) {
+    inherits(x, 'cutpoint_condition') &&
+        is.list(x) &&
+        !is.null(x$label) &&
+        !is.null(x$var) &&
+        !is.null(x$cutpoint) &&
+        !is.null(x$type) &&
+        !is.null(x$criterion)
+}

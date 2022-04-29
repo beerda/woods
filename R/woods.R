@@ -56,6 +56,8 @@ woods.default <- function(y,
                           mtry = ceiling(sqrt(ncol(x))),
                           max_height = NA,
                           node_size = 1) {
+    assert_that(is.atomic(y) && !is.null(y))
+    assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
@@ -71,11 +73,13 @@ woods.default <- function(y,
         create_result <- mean_result
         leaf_type <- 'mean'
         split_type <- 'sum of squared error'
+        levels <- NULL
     } else {
         find_best_split <- igr_condition
         create_result <- mode_result
         leaf_type <- 'mode'
         split_type <- 'information gain'
+        levels <- levels(data$y)
     }
 
     cfg <- list(max_height = max_height,
@@ -90,8 +94,23 @@ woods.default <- function(y,
     structure(list(call = match.call(),
                    model = model,
                    split_type = split_type,
-                   leaf_type = leaf_type),
+                   leaf_type = leaf_type,
+                   variables = colnames(x),
+                   levels = levels),
               class = 'woods')
+}
+
+
+#' @author Michal Burda
+#' @export
+is.woods <- function(x) {
+    inherits(x, 'woods') &&
+        is.list(x) &&
+        !is.null(x$call) &&
+        !is.null(x$model) &&
+        !is.null(x$split_type) &&
+        !is.null(x$leaf_type) &&
+        !is.null(x$variables)
 }
 
 
