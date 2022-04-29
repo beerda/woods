@@ -6,8 +6,7 @@
 #' @author Michal Burda
 #' @export
 mode_result <- function(data) {
-    uniq <- unique(data$y)
-    value <- uniq[which.max(tabulate(match(data$y, uniq)))]
+    value <- modus(data$y)
     size <- length(data$y)
 
     list(label = paste0(value, ' (mode, n=', size, ')'),
