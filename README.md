@@ -21,11 +21,6 @@ Firstly, load the package to start using the `woods` library:
 
 ``` r
 library(woods)
-#> 
-#> Attaching package: 'woods'
-#> The following object is masked from 'package:base':
-#> 
-#>     split
 ```
 
 Then create some input data:

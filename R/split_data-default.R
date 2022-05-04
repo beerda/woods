@@ -7,7 +7,7 @@
 #'     `def` vector, `right` data correspond to `FALSE` in the `def` vector)
 #' @author Michal Burda
 #' @export
-split.default <- function(def, data, cfg) {
+split_data.default <- function(def, data, cfg) {
     assert_that(is.vector(def) && is.logical(def))
     assert_that(is.woods_data(data))
 
