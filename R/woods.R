@@ -62,10 +62,6 @@ woods.default <- function(y,
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
 
-    if (!is.numeric(y)) {
-        y <- factor(y)
-    }
-
     data <- woods_data(y = y, x = x)
 
     if (is.numeric(data$y)) {

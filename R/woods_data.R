@@ -40,6 +40,11 @@ woods_data <- function(y, x) {
     # ensure colnames are unique
     assert_that(all(!duplicated(colnames(x))))
 
+    # ensure y is either numeric or a factor
+    if (!is.numeric(y)) {
+        y <- factor(y)
+    }
+
     structure(list(y = y, x = df),
               class = 'woods_data')
 }
