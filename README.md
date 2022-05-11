@@ -5,6 +5,19 @@
 
 Experimental R package for double random forests
 
+## Implemented Features
+
+-   creation of a binary decision tree based on data
+-   both numerical and categorical inputs are allowed (categorical
+    inputs are transformed to sets of dummy 0/1 variables)
+-   numerical target allowed:
+    -   node splitting by the Sum of Squared Error (SSE)
+    -   leaf node – average value
+-   categorical target allowed:
+    -   node splitting by the Information Gain Ratio (IGR)
+    -   leaf node – mode (the most frequent value)
+-   bootstrapping available to create sets of trees (a forest)
+
 ## Installation
 
 To install the development version from GitHub, type the following
@@ -123,3 +136,37 @@ predict(fit, iris)
 #> [148] virginica virginica virginica
 #> Levels: setosa versicolor virginica
 ```
+
+## Fuzzy Transform
+
+-   a kernel-based approximation of function `f` (from discrete values)
+-   domains have to be bounded
+-   input domains are partitioned by fuzzy sets
+-   each fuzzy set of the partition is assigned with:
+    -   0-order f-transform: an average value of the original function
+        `f`
+    -   1-order f-transform: a linear function fitted to the values of
+        `f`
+    -   n-order f-transform: a polynomial function fitted to the values
+        of `f`
+-   fitting is based on weighting by the membership degrees of inputs to
+    the fuzzy sets of the partitions
+
+<!-- -->
+
+    y ^
+      |                             _____
+      |           __*____         */    *\
+      |          /       \_       /       \
+      |       * /         *\__*__/         \*
+      |      __/                            \
+      |   __/
+      |  /*
+      | /
+      |/
+      +------------------------------------------>
+                                                 x
+          _    _    _    _    _    _    _    _  
+         / \  / \  / \  / \  / \  / \  / \  / \  
+        /   \/   \/   \/   \/   \/   \/   \/   \  
+       /    /\   /\   /\   /\   /\   /\   /\    \  
