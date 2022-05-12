@@ -22,7 +22,7 @@ test_that("gauss_rulebase", {
 
 test_that("gauss_rulebase (single variable)", {
     d <- woods_data(y = c(1:10, 21:30, 41:50),
-                    x = data.frame(x = (1:30)))
+                    x = data.frame(x = 2 * (1:30)))
 
     rb <- gauss_rulebase(d, list(n_parts = 3))
 

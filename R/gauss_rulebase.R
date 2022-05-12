@@ -42,7 +42,7 @@ gauss_rulebase <- function(data, cfg) {
 
     stdevs <- mapply(.execute_on_split(sd), ind_r, ind_c)
     stdevs[is.na(stdevs)] <- 1  # if not enough data (2) in a split
-    stdevs <- stdevs / 2
+    stdevs <- stdevs
     dim(stdevs) <- c(n_inputs, cfg$n_parts)
 
 
