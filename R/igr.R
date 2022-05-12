@@ -5,11 +5,12 @@
 #' @seealso https://scientistcafe.com/ids/splitting-criteria.html
 #' @import forcats
 igr <- function(x1, x2) {
-    prop <- length(x1) / (length(x1) + length(x2))
+    lenxx <- length(x1) + length(x2)
+    prop1 <- length(x1) / lenxx
+    prop2 <- length(x2) / lenxx
     before <- entropy(fct_c(x1, x2))
-    after <- prop * entropy(x1) + (1 - prop) * entropy(x2)
-    x <- factor(c(rep(1, length(x1)), rep(0, length(x2))), levels = 0:1)
-    si <- entropy(x)
+    after <- prop1 * entropy(x1) + prop2 * entropy(x2)
+    si <- entropy_prob(prop1, prop2)
 
     (before - after) / si
 }
