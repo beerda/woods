@@ -13,7 +13,7 @@ cutpoint_finder_factory <- function(compute_criterion, which_criterion, type) {
         if (length(data$y) <= 1) {
             return(cutpoint_condition(var = colnames(data$x)[1],
                                       cutpoint =  data$x[[1]][1],
-                                      type = type,,
+                                      type = type,
                                       criterion = 0))
         }
 
