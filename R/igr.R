@@ -3,7 +3,7 @@
 #' @author Michal Burda
 #' @export
 #' @seealso https://scientistcafe.com/ids/splitting-criteria.html
-#' @import forcats
+#' @importFrom forcats fct_c
 igr <- function(x1, x2) {
     lenxx <- length(x1) + length(x2)
     prop1 <- length(x1) / lenxx
