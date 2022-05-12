@@ -14,3 +14,16 @@ igr <- function(x1, x2) {
 
     (before - after) / si
 }
+
+
+#' Compute the Information Gain Ratio (IGR)
+#' @return
+#' @author Michal Burda
+#' @export
+#' @seealso https://scientistcafe.com/ids/splitting-criteria.html
+igr_by_indices <- function(x, indices) {
+    if (!is.factor(x)) {
+        x <- factor(x)
+    }
+    .igr_by_indices(x, as.logical(indices))
+}

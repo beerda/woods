@@ -40,9 +40,8 @@ cutpoint_finder_factory <- function(compute_criterion, which_criterion, type) {
             cutpoint <- variants$cutpoint[i]
             x <- data$x[[var]]
             indices <- (x <= cutpoint)
-            y1 <- data$y[indices]
-            y2 <- data$y[!indices]
-            compute_criterion(y1, y2)
+
+            compute_criterion(data$y, indices)
         })
 
         best <- which_criterion(variants$criterion)

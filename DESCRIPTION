@@ -10,7 +10,13 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
-    assertthat, forcats
+    assertthat,
+    forcats,
+    Rcpp
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+LinkingTo: 
+    Rcpp
+NeedsCompilation: yes
+SystemRequirements: C++11

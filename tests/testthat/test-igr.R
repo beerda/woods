@@ -3,6 +3,11 @@ test_that('igr', {
     y2 <- factor(c(rep(1, 20), rep(0, 0)), levels=0:1)
     x <- factor(c(rep(0, length(y1)), rep(1, length(y2))), levels=0:1)
 
-    expect_equal(igr(y1, y2), 0.61 / entropy(x),
+    expect_equal(igr(y1, y2),
+                 0.61 / entropy(x),
+                 tolerance = 0.0001)
+
+    expect_equal(igr_by_indices(c(y1, y2), x == 0),
+                 0.61 / entropy(x),
                  tolerance = 0.0001)
 })
