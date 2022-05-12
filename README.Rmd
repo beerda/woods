@@ -80,6 +80,39 @@ predict(fit, iris)
 ```
 
 
+## Using `woods` with `caret`
+
+```{r}
+library(caret)
+library(doParallel)
+
+set.seed(335)
+cl <- makePSOCKcluster(24)
+registerDoParallel(cl)
+
+# setup the cross-validation parameters
+trControl <- trainControl(method = 'repeatedcv',
+                        number = 10,
+                        repeats = 1)
+
+# cross-validate performance of the random forest as implemented by L. Breiman (the randomForest package)
+rfFit <- train(Species ~ .,
+               data = iris,
+               method = 'rf',
+               trControl = trControl)
+print(rfFit)
+
+# cross-validate performance of woods
+woodsFit <- train(Species ~ .,
+                  data = iris,
+                  method = woodsModelInfo,
+                  trControl = trControl)
+print(woodsFit)
+
+stopCluster(cl)
+```
+
+
 ## Fuzzy Transform
 
 - a kernel-based approximation of function `f` (from discrete values)
