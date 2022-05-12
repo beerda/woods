@@ -62,14 +62,14 @@ print(d)
 To train the `woods` model with columns `a`, `b` being the independent variables and `y` being the target, the following command has to be executed:
 
 ```{r}
-fit <- woods(y ~ a + b, data = d)
+fit <- woods(y ~ a + b, data = d, n_tree = 2)
 print(fit)
 ```
 
 Analogously we run the algorithm e.g. on iris dataset:
 
 ```{r}
-fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, node_size = 5)
+fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, n_tree = 2)
 print(fit)
 ```
 
