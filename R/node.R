@@ -21,6 +21,12 @@ node <- function(data, cfg) {
 
     node_data <- cfg$prepare_node_data(data)
     split_def <- cfg$find_best_split(node_data, cfg)
+
+    # failed to split the data?
+    if (is.null(split_def)) {
+        return(leaf(data, cfg))
+    }
+
     splitted <- split_data(split_def, data, cfg)
 
     # any of the children is smaller than node_size?
