@@ -29,9 +29,15 @@ resampling_factory <- function(rows = identity, cols = identity) {
 
     function(data) {
         m <- nrow(data$x)
+        size_m <- result_m(m)
+        size_m <- min(m, size_m)
+
         n <- ncol(data$x)
-        i <- sample(m, result_m(m), replace = TRUE)
-        j <- sample(n, result_n(n), replace = FALSE)
+        size_n <- result_n(n)
+        size_n <- min(n, size_n)
+
+        i <- sample(m, size_m, replace = TRUE)
+        j <- sample(n, size_n, replace = FALSE)
 
         data[i, j]
     }

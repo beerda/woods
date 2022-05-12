@@ -21,6 +21,14 @@ test_that("resampling_factory", {
     expect_equal(nrow(r$x), 3)
     expect_equal(ncol(r$x), 2)
 
+    f <- resampling_factory(rows = 100, cols = 100)
+    expect_true(is.function(f))
+    r <- f(d)
+    expect_true(is.woods_data(r))
+    expect_equal(length(r$y), 5)
+    expect_equal(nrow(r$x), 5)
+    expect_equal(ncol(r$x), 4)
+
     f <- resampling_factory(rows = function(x) floor(x / 2),
                             cols = function(x) floor(x / 2) - 1)
     expect_true(is.function(f))
