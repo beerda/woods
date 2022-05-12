@@ -22,6 +22,7 @@ node <- function(data, cfg) {
     split_def <- cfg$find_best_split(node_data, cfg)
     splitted <- split_data(split_def, data, cfg)
 
+    # any of the children is smaller than node_size?
     if (length(splitted$left$y) < cfg$node_size || length(splitted$right$y) < cfg$node_size) {
         return(leaf(data, cfg))
     }
