@@ -4,17 +4,13 @@
 \alias{gauss_rulebase}
 \title{Create the empty Gauss rulebase}
 \usage{
-gauss_rulebase(n_inputs, n_parts)
-}
-\arguments{
-\item{n_inputs}{the number of input variables}
-
-\item{n_parts}{the number of Gauss fuzzy sets to partition the space of each variable to}
+gauss_rulebase(data, cfg)
 }
 \value{
 An instance of the \code{gaus_rulebase} S3 class, which is a list with the following elements:
 - n_inputs - the number of input variables
-- n_parts - the number of fuzzy sets in the partitioning of the space of each input variable
+- n_parts - the size of the partition of each input variable, i.e., the number of fuzzy sets
+in the partitioning of the space of each input variable
 - means - an $(n_inputs, n_parts)$ matrix of the $m$ parameters of the Gauss distribution, for
 input $i$ and part $j$
 - stdevs - an $(n_inputs, n_parts)$ matrix of the $\sigma$ parameters of the Gauss distribution,

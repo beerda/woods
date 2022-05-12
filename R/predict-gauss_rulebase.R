@@ -26,7 +26,7 @@ gauss_membership <- function(rulebase, inputs) {
 gauss_firing <- function(rulebase, inputs) {
     memb <- gauss_membership(rulebase, inputs)
     fire <- sapply(seq_len(rulebase$n_inputs),
-                   function(i) memb[i, rulebase$antecedents[, i]])
+                   function(i) memb[i, rulebase$antecedents[, i], drop = FALSE])
    apply(fire, 1, prod)
 }
 
