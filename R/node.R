@@ -12,8 +12,9 @@ node <- function(data, cfg) {
         return(leaf(data, cfg))
     }
 
-    # all input columns are constant?
     data <- remove_constants(data)
+
+    # all input columns are constant?
     if (ncol(data$x) <= 0) {
         return(leaf(data, cfg))
     }
@@ -55,7 +56,7 @@ is.leafnode <- function(x) {
 
 
 #' @export
-print.node <- function(x, prefix, ...) {
+print.node <- function(x, prefix = '', ...) {
     if (!is.null(x$split)) {
         cat(prefix, x$split$label, ' (', class(x$split)[1], ')', '\n', sep = '')
         prefix <- paste0(prefix, '    ')
