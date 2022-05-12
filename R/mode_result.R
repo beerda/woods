@@ -6,6 +6,8 @@
 #' @author Michal Burda
 #' @export
 mode_result <- function(data) {
+    assert_that(is.factor(data$y))
+
     value <- modus(data$y)
     size <- length(data$y)
 
