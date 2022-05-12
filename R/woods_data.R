@@ -60,6 +60,8 @@ is.woods_data <- function(x) {
 `[.woods_data` <- function(x, i, j, drop=FALSE) {
     if (drop) warning('drop ignored')
 
-    woods_data(y = x$y[i],
-               x = x$x[i, j, drop=FALSE])
+    x$y <- x$y[i]
+    x$x <- x$x[i, j, drop=FALSE]
+
+    x
 }

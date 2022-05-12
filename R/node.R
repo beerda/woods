@@ -1,7 +1,4 @@
 node <- function(data, cfg) {
-    assert_that(is.woods_data(data))
-    assert_that(is.list(cfg))
-
     # max tree height reached?
     if (!is.na(cfg$max_height) && cfg$max_height <= 1) { # max_height is decreasing in child nodes
         return(leaf(data, cfg))
