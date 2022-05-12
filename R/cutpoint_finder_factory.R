@@ -2,6 +2,7 @@
 #' @return
 #' @author Michal Burda
 #' @export
+#' @importFrom Rfast sort_unique
 cutpoint_finder_factory <- function(compute_criterion, which_criterion, type) {
     function(data, cfg) {
         # empty data?
@@ -18,9 +19,8 @@ cutpoint_finder_factory <- function(compute_criterion, which_criterion, type) {
         }
 
         variants <- lapply(colnames(data$x), function(var) {
-            points <- unique(data$x[[var]])
-            points <- sort(points, decreasing = TRUE)
-            points <- points[-1] # remove the highest value
+            points <- sort_unique(data$x[[var]])
+            points <- points[-length(points)]  # remove the hightest value
 
             if (length(points) <= 0) {
                 return(data.frame())
