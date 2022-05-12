@@ -41,7 +41,7 @@ woods_data <- function(y, x) {
     assert_that(all(!duplicated(colnames(x))))
 
     # ensure y is either numeric or a factor
-    if (!is.numeric(y)) {
+    if (!is.factor(y) && !is.numeric(y)) {
         y <- factor(y)
     }
 

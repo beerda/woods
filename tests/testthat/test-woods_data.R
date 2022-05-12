@@ -64,3 +64,37 @@ test_that("woods data conversions to numeric", {
     expect_equal(d$x$z, 5:1)
 
 })
+
+
+test_that("woods_data subsetting numeric y", {
+    y <- 1:5
+    x <- data.frame(a = 11:15,
+                    b = 21:25)
+    d <- woods_data(y = y, x = x)
+
+    d <- d[c(T, T, F, F, F), ]
+    expect_true(is.woods_data(d))
+    expect_true(is.data.frame(d$x))
+    expect_equal(ncol(d$x), 2)
+    expect_equal(d$x$a, 11:12)
+    expect_equal(d$x$b, 21:22)
+    expect_equal(d$y, 1:2)
+
+})
+
+
+test_that("woods_data subsetting factor y", {
+    y <- factor(letters[1:5])
+    x <- data.frame(a = 11:15,
+                    b = 21:25)
+    d <- woods_data(y = y, x = x)
+
+    d <- d[c(T, T, F, F, F), ]
+    expect_true(is.woods_data(d))
+    expect_true(is.data.frame(d$x))
+    expect_equal(ncol(d$x), 2)
+    expect_equal(d$x$a, 11:12)
+    expect_equal(d$x$b, 21:22)
+    expect_equal(d$y, factor(letters[1:2], levels = letters[1:5]))
+
+})
