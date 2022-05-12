@@ -2,10 +2,17 @@ node <- function(data, cfg) {
     assert_that(is.woods_data(data))
     assert_that(is.list(cfg))
 
-    if (!is.na(cfg$max_height) && cfg$max_height <= 1) {
+    # max tree height reached?
+    if (!is.na(cfg$max_height) && cfg$max_height <= 1) { # max_height is decreasing in child nodes
         return(leaf(data, cfg))
     }
 
+    # target is constant?
+    if (is_constant(data$y)) {
+        return(leaf(data, cfg))
+    }
+
+    # all input columns are constant?
     data <- remove_constants(data)
     if (ncol(data$x) <= 0) {
         return(leaf(data, cfg))
