@@ -3,26 +3,28 @@ node <- function(data, cfg) {
     assert_that(is.list(cfg))
 
     if (!is.na(cfg$max_height) && cfg$max_height <= 1) {
-        res <- leaf(data, cfg)
-
-    } else {
-        node_data <- cfg$prepare_node_data(data)
-        split_def <- cfg$find_best_split(node_data, cfg)
-        splitted <- split_data(split_def, data, cfg)
-
-        if (length(splitted$left$y) < cfg$node_size || length(splitted$right$y) < cfg$node_size) {
-            res <- leaf(data, cfg)
-
-        } else {
-            cfg$max_height <- cfg$max_height - 1
-            res <- structure(list(split = split_def,
-                                  left = node(splitted$left, cfg),
-                                  right = node(splitted$right, cfg)),
-                             class = 'node')
-        }
+        return(leaf(data, cfg))
     }
 
-    res
+    data <- remove_constants(data)
+    if (ncol(data$x) <= 0) {
+        return(leaf(data, cfg))
+    }
+
+    node_data <- cfg$prepare_node_data(data)
+    split_def <- cfg$find_best_split(node_data, cfg)
+    splitted <- split_data(split_def, data, cfg)
+
+    if (length(splitted$left$y) < cfg$node_size || length(splitted$right$y) < cfg$node_size) {
+        return(leaf(data, cfg))
+    }
+
+    cfg$max_height <- cfg$max_height - 1
+
+    structure(list(split = split_def,
+                   left = node(splitted$left, cfg),
+                   right = node(splitted$right, cfg)),
+              class = 'node')
 }
 
 
