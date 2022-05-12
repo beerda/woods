@@ -11,9 +11,8 @@
 .miFit <- function(x, y, wts, param, lev, last, weights, classProbs, ...) {
     woods::woods(y = y,
                  x = as.data.frame(x),
-                 n_tree = 100,
-                 mtry = param$mtry,
-                 node_size = 10)
+                 n_tree = 500,
+                 mtry = param$mtry)
 }
 
 

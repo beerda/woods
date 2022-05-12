@@ -52,10 +52,10 @@ woods.formula <- function(formula,
 #' @export
 woods.default <- function(y,
                           x,
-                          n_tree = 2,
-                          mtry = ceiling(sqrt(ncol(x))),
+                          n_tree = 500,
+                          mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x) / 3), 1),
                           max_height = NA,
-                          node_size = 1) {
+                          node_size = if (is.factor(y)) 1 else 5) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))

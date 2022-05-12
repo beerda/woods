@@ -8,9 +8,9 @@
   y,
   x,
   n_tree = 2,
-  mtry = ceiling(sqrt(ncol(x))),
+  mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x)/3), 1),
   max_height = NA,
-  node_size = 1
+  node_size = if (is.factor(y)) 1 else 5
 )
 }
 \value{
