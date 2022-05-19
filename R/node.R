@@ -4,6 +4,11 @@ node <- function(data, cfg) {
         return(leaf(data, cfg))
     }
 
+    # too small node?
+    if (length(data$y) < cfg$node_size) {
+        return(leaf(data, cfg))
+    }
+
     # target is constant?
     if (is_constant(data$y)) {
         return(leaf(data, cfg))
