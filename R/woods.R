@@ -81,7 +81,7 @@ woods.default <- function(y,
     cfg <- list(max_height = max_height,
                 node_size = node_size,
                 prepare_tree_data = identity,
-                prepare_node_data = resampling_factory(cols = mtry),
+                prepare_node_data = resampling_factory(rows = NULL, cols = mtry),
                 find_best_split = find_best_split,
                 create_result = create_result)
 
