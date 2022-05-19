@@ -93,7 +93,7 @@ registerDoParallel(cl)
 # setup the cross-validation parameters
 trControl <- trainControl(method = 'repeatedcv',
                         number = 10,
-                        repeats = 1)
+                        repeats = 5)
 
 # cross-validate performance of the random forest as implemented by L. Breiman (the randomForest package)
 rfFit <- train(Species ~ .,

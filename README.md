@@ -346,7 +346,7 @@ registerDoParallel(cl)
 # setup the cross-validation parameters
 trControl <- trainControl(method = 'repeatedcv',
                         number = 10,
-                        repeats = 1)
+                        repeats = 5)
 
 # cross-validate performance of the random forest as implemented by L. Breiman (the randomForest package)
 rfFit <- train(Species ~ .,
@@ -361,17 +361,17 @@ print(rfFit)
 #>   3 classes: 'setosa', 'versicolor', 'virginica' 
 #> 
 #> No pre-processing
-#> Resampling: Cross-Validated (10 fold, repeated 1 times) 
+#> Resampling: Cross-Validated (10 fold, repeated 5 times) 
 #> Summary of sample sizes: 135, 135, 135, 135, 135, 135, ... 
 #> Resampling results across tuning parameters:
 #> 
 #>   mtry  Accuracy   Kappa
-#>   2     0.9600000  0.94 
-#>   3     0.9600000  0.94 
-#>   4     0.9533333  0.93 
+#>   2     0.9546667  0.932
+#>   3     0.9560000  0.934
+#>   4     0.9546667  0.932
 #> 
 #> Accuracy was used to select the optimal model using the largest value.
-#> The final value used for the model was mtry = 2.
+#> The final value used for the model was mtry = 3.
 
 # cross-validate performance of woods
 woodsFit <- train(Species ~ .,
@@ -384,17 +384,22 @@ print(woodsFit)
 #>   3 classes: 'setosa', 'versicolor', 'virginica' 
 #> 
 #> No pre-processing
-#> Resampling: Cross-Validated (10 fold, repeated 1 times) 
+#> Resampling: Cross-Validated (10 fold, repeated 5 times) 
 #> Summary of sample sizes: 135, 135, 135, 135, 135, 135, ... 
 #> Resampling results across tuning parameters:
 #> 
-#>   mtry  Accuracy   Kappa
-#>   2     0.9400000  0.91 
-#>   3     0.9333333  0.90 
-#>   4     0.9400000  0.91 
+#>   resample_rows  mtry  Accuracy   Kappa
+#>   FALSE          2     0.9533333  0.930
+#>   FALSE          3     0.9506667  0.926
+#>   FALSE          4     0.9440000  0.916
+#>   FALSE          5     0.9440000  0.916
+#>    TRUE          2     0.9573333  0.936
+#>    TRUE          3     0.9520000  0.928
+#>    TRUE          4     0.9506667  0.926
+#>    TRUE          5     0.9520000  0.928
 #> 
 #> Accuracy was used to select the optimal model using the largest value.
-#> The final value used for the model was mtry = 2.
+#> The final values used for the model were resample_rows = TRUE and mtry = 2.
 
 stopCluster(cl)
 ```
