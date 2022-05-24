@@ -56,7 +56,7 @@ woods.default <- function(y,
                           mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x) / 3), 1),
                           max_height = NA,
                           node_size = if (is.factor(y)) 1 else 5,
-                          resample_rows = FALSE,
+                          resample_rows = TRUE,
                           principal_components = TRUE) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
