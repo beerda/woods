@@ -66,7 +66,11 @@ is.leafnode <- function(x) {
 #' @export
 print.node <- function(x, prefix = '', ...) {
     if (!is.null(x$split)) {
-        cat(prefix, x$split$label, ' (', class(x$split)[1], ')', '\n', sep = '')
+        cat(prefix,
+            x$split$label,
+            ' (', class(x$split)[1], ')',
+            '\n',
+            sep = '')
         prefix <- paste0(prefix, '    ')
         print(x$left, prefix)
         print(x$right, prefix)
