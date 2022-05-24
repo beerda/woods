@@ -22,6 +22,8 @@ node <- function(data, cfg) {
     }
 
     node_data <- cfg$prepare_node_data(data)
+    fits <- create_transformation_fits(cfg$transformations, node_data)
+    node_data <- transform_data(fits, node_data)
     split_def <- cfg$find_best_split(node_data, cfg)
 
     # failed to split the data?
@@ -29,7 +31,9 @@ node <- function(data, cfg) {
         return(leaf(data, cfg))
     }
 
-    splitted <- split_data(split_def, data, cfg)
+    trans_data <- transform_data(fits, data)
+    indices <- split_indices(split_def, trans_data, cfg)
+    splitted <- split_data(indices, data, cfg)
 
     # any of the children is smaller than node_size?
     if (length(splitted$left$y) < cfg$node_size || length(splitted$right$y) < cfg$node_size) {
@@ -38,7 +42,13 @@ node <- function(data, cfg) {
 
     cfg$max_height <- cfg$max_height - 1
 
+    transformation <- NULL
+    if (!is.null(fits[[split_def$var]])) {
+        transformation <-  fits[split_def$var]
+    }
+
     structure(list(split = split_def,
+                   transformation = transformation,
                    left = node(splitted$left, cfg),
                    right = node(splitted$right, cfg)),
               class = 'node')
@@ -48,6 +58,28 @@ node <- function(data, cfg) {
 leaf <- function(data, cfg) {
     structure(list(result = cfg$create_result(data)),
               class = c('node', 'leaf'))
+}
+
+
+create_transformation_fits <- function(transformations, data) {
+    res <- lapply(transformations, function(f) {
+        res <- try(f(data$x), silent = TRUE)
+        if (inherits(res, 'try-error')) NULL else res
+    })
+
+    res[lengths(res) > 0]
+}
+
+
+transform_data <- function(fits, data) {
+    if (length(fits) <= 0) {
+        return(data)
+    }
+
+    preds <- lapply(fits, function(f) as.numeric(predict(f, data$x)))
+    data$x <- do.call(cbind, c(list(data$x), preds))
+
+    data
 }
 
 

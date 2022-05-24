@@ -9,8 +9,13 @@ predict.node <- function(object, newdata, ...) {
     if (is.leafnode(object)) {
         res <- rep(object$result$value, nrow(newdata))
     } else {
-        condition <- predict(object$split, newdata)
-        if (length(condition) != nrow(newdata)) {
+        tr_data <- newdata
+        if (!is.null(object$transformation)) {
+            preds <- lapply(object$transformation, function(f) as.numeric(predict(f, tr_data)))
+            tr_data <- do.call(cbind, c(list(tr_data), preds))
+        }
+        condition <- predict(object$split, tr_data)
+        if (length(condition) != nrow(tr_data)) {
             stop('Internal error: length of condition evaluation differs from length of data')
         }
         if (any(is.na(condition))) {

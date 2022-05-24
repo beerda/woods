@@ -2,16 +2,18 @@
 % Please edit documentation in R/resampling_factory.R
 \name{resampling_factory}
 \alias{resampling_factory}
-\title{Create a function for row-wise and col-wisse resampling of data}
+\title{Create a function for row-wise and col-wise resampling of data}
 \usage{
-resampling_factory(rows = identity, cols = identity)
+resampling_factory(rows = NULL, cols = NULL)
 }
 \arguments{
-\item{rows}{either a positive value indicating the required number of rows
+\item{rows}{either a NULL value indicating no resampling should be done at all,
+or a positive value indicating the required number of rows
 or a function that from a number of rows of input data computes the required number of
 rows to be selected}
 
-\item{cols}{either a positive value indicating the required number of columns
+\item{cols}{either a NULL value indicating no resampling should be done at all,
+or a positive value indicating the required number of columns
 or a function that from a number of columns of input data computes the required number of
 columns to be selected}
 }

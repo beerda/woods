@@ -10,7 +10,9 @@
   n_tree = 500,
   mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x)/3), 1),
   max_height = NA,
-  node_size = if (is.factor(y)) 1 else 5
+  node_size = if (is.factor(y)) 1 else 5,
+  resample_rows = FALSE,
+  principal_components = FALSE
 )
 }
 \value{

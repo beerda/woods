@@ -56,12 +56,14 @@ woods.default <- function(y,
                           mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x) / 3), 1),
                           max_height = NA,
                           node_size = if (is.factor(y)) 1 else 5,
-                          resample_rows = FALSE) {
+                          resample_rows = FALSE,
+                          principal_components = TRUE) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
+    assert_that(is.flag(principal_components))
 
     data <- woods_data(y = y, x = x)
 
@@ -79,11 +81,19 @@ woods.default <- function(y,
         levels <- levels(data$y)
     }
 
+    resample <- resampling_factory(rows = if (resample_rows) identity else NULL,
+                                   cols = mtry)
+
+    transformations <- list()
+    if (principal_components) {
+        transformations$..PC.. = function(x) prcomp(x, center = TRUE, scale. = TRUE, rank. = 1)
+    }
+
     cfg <- list(max_height = max_height,
                 node_size = node_size,
                 prepare_tree_data = identity,
-                prepare_node_data = resampling_factory(rows = if (resample_rows) identity else NULL,
-                                                       cols = mtry),
+                prepare_node_data = resample,
+                transformations = transformations,
                 find_best_split = find_best_split,
                 create_result = create_result)
 
