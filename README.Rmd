@@ -69,7 +69,7 @@ print(fit)
 Analogously we run the algorithm e.g. on iris dataset:
 
 ```{r}
-fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, n_tree = 2)
+fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, n_tree = 2, max_height = 3)
 print(fit)
 ```
 

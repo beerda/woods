@@ -71,10 +71,10 @@ print(fit)
 Analogously we run the algorithm e.g. on iris dataset:
 
 ``` r
-fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, n_tree = 2)
+fit <- woods(Species ~ Sepal.Length + Sepal.Width, data = iris, n_tree = 2, max_height = 3)
 print(fit)
 #> Call: woods.formula(formula = Species ~ Sepal.Length + Sepal.Width, 
-#>     data = iris, n_tree = 2)
+#>     data = iris, n_tree = 2, max_height = 3)
 #> Split: information gain
 #> Leaves: mode
 #> 
@@ -82,214 +82,20 @@ print(fit)
 #> [[1]]
 #> Sepal.Length <= 5.5 (cutpoint_condition)
 #>     Sepal.Width <= 2.7 (cutpoint_condition)
-#>         Sepal.Length <= 4.5 (cutpoint_condition)
-#>             setosa (mode, n=1)
-#>             Sepal.Length <= 4.9 (cutpoint_condition)
-#>                 Sepal.Width <= 2.4 (cutpoint_condition)
-#>                     versicolor (mode, n=1)
-#>                     virginica (mode, n=1)
-#>                 versicolor (mode, n=9)
-#>         Sepal.Width <= 3 (cutpoint_condition)
-#>             Sepal.Length <= 4.9 (cutpoint_condition)
-#>                 setosa (mode, n=6)
-#>                 setosa (mode, n=2)
-#>             setosa (mode, n=39)
-#>     Sepal.Width <= 3.8 (cutpoint_condition)
-#>         Sepal.Width <= 3.6 (cutpoint_condition)
-#>             Sepal.Width <= 2.3 (cutpoint_condition)
-#>                 Sepal.Length <= 6 (cutpoint_condition)
-#>                     versicolor (mode, n=2)
-#>                     versicolor (mode, n=2)
-#>                 Sepal.Width <= 3.3 (cutpoint_condition)
-#>                     Sepal.Width <= 3.2 (cutpoint_condition)
-#>                         Sepal.Length <= 6.8 (cutpoint_condition)
-#>                             Sepal.Width <= 2.5 (cutpoint_condition)
-#>                                 Sepal.Length <= 5.6 (cutpoint_condition)
-#>                                     versicolor (mode, n=1)
-#>                                     Sepal.Length <= 5.7 (cutpoint_condition)
-#>                                         virginica (mode, n=1)
-#>                                         Sepal.Length <= 6.3 (cutpoint_condition)
-#>                                             versicolor (mode, n=2)
-#>                                             virginica (mode, n=1)
-#>                                 Sepal.Length <= 5.7 (cutpoint_condition)
-#>                                     Sepal.Length <= 5.6 (cutpoint_condition)
-#>                                         Sepal.Width <= 2.7 (cutpoint_condition)
-#>                                             versicolor (mode, n=1)
-#>                                             Sepal.Width <= 2.8 (cutpoint_condition)
-#>                                                 virginica (mode, n=1)
-#>                                                 versicolor (mode, n=3)
-#>                                         versicolor (mode, n=5)
-#>                                     Sepal.Length <= 6.7 (cutpoint_condition)
-#>                                         Sepal.Width <= 2.6 (cutpoint_condition)
-#>                                             Sepal.Length <= 5.8 (cutpoint_condition)
-#>                                                 versicolor (mode, n=1)
-#>                                                 virginica (mode, n=1)
-#>                                             Sepal.Width <= 2.7 (cutpoint_condition)
-#>                                                 Sepal.Length <= 6 (cutpoint_condition)
-#>                                                     Sepal.Length <= 5.8 (cutpoint_condition)
-#>                                                         versicolor (mode, n=4)
-#>                                                         versicolor (mode, n=1)
-#>                                                     virginica (mode, n=2)
-#>                                                 Sepal.Length <= 5.9 (cutpoint_condition)
-#>                                                     Sepal.Length <= 5.8 (cutpoint_condition)
-#>                                                         virginica (mode, n=1)
-#>                                                         Sepal.Width <= 3 (cutpoint_condition)
-#>                                                             versicolor (mode, n=2)
-#>                                                             versicolor (mode, n=1)
-#>                                                     Sepal.Width <= 2.9 (cutpoint_condition)
-#>                                                         Sepal.Length <= 6.1 (cutpoint_condition)
-#>                                                             versicolor (mode, n=4)
-#>                                                             Sepal.Length <= 6.4 (cutpoint_condition)
-#>                                                                 Sepal.Length <= 6.3 (cutpoint_condition)
-#>                                                                     Sepal.Width <= 2.8 (cutpoint_condition)
-#>                                                                         virginica (mode, n=2)
-#>                                                                         versicolor (mode, n=2)
-#>                                                                     Sepal.Width <= 2.8 (cutpoint_condition)
-#>                                                                         virginica (mode, n=2)
-#>                                                                         versicolor (mode, n=1)
-#>                                                                 versicolor (mode, n=2)
-#>                                                         Sepal.Width <= 3.1 (cutpoint_condition)
-#>                                                             Sepal.Width <= 3 (cutpoint_condition)
-#>                                                                 Sepal.Length <= 6.5 (cutpoint_condition)
-#>                                                                     Sepal.Length <= 6 (cutpoint_condition)
-#>                                                                         virginica (mode, n=1)
-#>                                                                         Sepal.Length <= 6.1 (cutpoint_condition)
-#>                                                                             versicolor (mode, n=2)
-#>                                                                             virginica (mode, n=3)
-#>                                                                     Sepal.Length <= 6.6 (cutpoint_condition)
-#>                                                                         versicolor (mode, n=1)
-#>                                                                         versicolor (mode, n=2)
-#>                                                                 versicolor (mode, n=4)
-#>                                                             Sepal.Length <= 6.4 (cutpoint_condition)
-#>                                                                 versicolor (mode, n=2)
-#>                                                                 virginica (mode, n=1)
-#>                                         Sepal.Width <= 2.8 (cutpoint_condition)
-#>                                             versicolor (mode, n=1)
-#>                                             virginica (mode, n=2)
-#>                             Sepal.Length <= 6.9 (cutpoint_condition)
-#>                                 Sepal.Width <= 3.1 (cutpoint_condition)
-#>                                     virginica (mode, n=3)
-#>                                     virginica (mode, n=1)
-#>                                 Sepal.Length <= 7 (cutpoint_condition)
-#>                                     versicolor (mode, n=1)
-#>                                     virginica (mode, n=9)
-#>                         Sepal.Length <= 6.3 (cutpoint_condition)
-#>                             versicolor (mode, n=2)
-#>                             virginica (mode, n=2)
-#>                     Sepal.Width <= 3.4 (cutpoint_condition)
-#>                         Sepal.Length <= 6 (cutpoint_condition)
-#>                             versicolor (mode, n=1)
-#>                             virginica (mode, n=2)
-#>                         virginica (mode, n=1)
-#>             Sepal.Length <= 5.7 (cutpoint_condition)
-#>                 setosa (mode, n=1)
-#>                 virginica (mode, n=2)
-#>         setosa (mode, n=2)
+#>         versicolor (mode, n=12)
+#>         setosa (mode, n=47)
+#>     Sepal.Length <= 6.8 (cutpoint_condition)
+#>         versicolor (mode, n=74)
+#>         virginica (mode, n=17)
 #> 
 #> [[2]]
 #> Sepal.Width <= 3.3 (cutpoint_condition)
-#>     Sepal.Width <= 2.9 (cutpoint_condition)
-#>         Sepal.Width <= 2.8 (cutpoint_condition)
-#>             Sepal.Length <= 4.5 (cutpoint_condition)
-#>                 setosa (mode, n=1)
-#>                 Sepal.Width <= 2.4 (cutpoint_condition)
-#>                     Sepal.Width <= 2.2 (cutpoint_condition)
-#>                         Sepal.Length <= 5 (cutpoint_condition)
-#>                             versicolor (mode, n=1)
-#>                             versicolor (mode, n=3)
-#>                         versicolor (mode, n=6)
-#>                     Sepal.Length <= 4.9 (cutpoint_condition)
-#>                         virginica (mode, n=1)
-#>                         Sepal.Width <= 2.6 (cutpoint_condition)
-#>                             Sepal.Length <= 5.6 (cutpoint_condition)
-#>                                 versicolor (mode, n=4)
-#>                                 Sepal.Length <= 5.8 (cutpoint_condition)
-#>                                     Sepal.Length <= 5.7 (cutpoint_condition)
-#>                                         versicolor (mode, n=2)
-#>                                         versicolor (mode, n=1)
-#>                                     Sepal.Width <= 2.5 (cutpoint_condition)
-#>                                         Sepal.Length <= 6.3 (cutpoint_condition)
-#>                                             versicolor (mode, n=2)
-#>                                             virginica (mode, n=1)
-#>                                         virginica (mode, n=2)
-#>                             Sepal.Width <= 2.7 (cutpoint_condition)
-#>                                 Sepal.Length <= 6 (cutpoint_condition)
-#>                                     Sepal.Length <= 5.2 (cutpoint_condition)
-#>                                         versicolor (mode, n=1)
-#>                                         Sepal.Length <= 5.6 (cutpoint_condition)
-#>                                             versicolor (mode, n=1)
-#>                                             versicolor (mode, n=5)
-#>                                     virginica (mode, n=2)
-#>                                 Sepal.Length <= 5.6 (cutpoint_condition)
-#>                                     virginica (mode, n=1)
-#>                                     Sepal.Length <= 6.8 (cutpoint_condition)
-#>                                         Sepal.Length <= 6.4 (cutpoint_condition)
-#>                                             Sepal.Length <= 6.1 (cutpoint_condition)
-#>                                                 Sepal.Length <= 5.8 (cutpoint_condition)
-#>                                                     Sepal.Length <= 5.7 (cutpoint_condition)
-#>                                                         versicolor (mode, n=2)
-#>                                                         virginica (mode, n=1)
-#>                                                     versicolor (mode, n=2)
-#>                                                 virginica (mode, n=4)
-#>                                             versicolor (mode, n=2)
-#>                                         virginica (mode, n=2)
-#>             Sepal.Length <= 6.6 (cutpoint_condition)
-#>                 Sepal.Length <= 6 (cutpoint_condition)
-#>                     Sepal.Length <= 5.6 (cutpoint_condition)
-#>                         setosa (mode, n=2)
-#>                         versicolor (mode, n=2)
-#>                     Sepal.Length <= 6.1 (cutpoint_condition)
-#>                         versicolor (mode, n=1)
-#>                         Sepal.Length <= 6.3 (cutpoint_condition)
-#>                             Sepal.Length <= 6.2 (cutpoint_condition)
-#>                                 versicolor (mode, n=1)
-#>                                 virginica (mode, n=1)
-#>                             versicolor (mode, n=2)
-#>                 virginica (mode, n=1)
-#>         Sepal.Length <= 5.1 (cutpoint_condition)
-#>             setosa (mode, n=17)
-#>             Sepal.Width <= 3.2 (cutpoint_condition)
-#>                 Sepal.Width <= 3.1 (cutpoint_condition)
-#>                     Sepal.Width <= 3 (cutpoint_condition)
-#>                         Sepal.Length <= 5.9 (cutpoint_condition)
-#>                             Sepal.Length <= 5.4 (cutpoint_condition)
-#>                                 versicolor (mode, n=1)
-#>                                 Sepal.Length <= 5.7 (cutpoint_condition)
-#>                                     versicolor (mode, n=3)
-#>                                     versicolor (mode, n=2)
-#>                             Sepal.Length <= 6.7 (cutpoint_condition)
-#>                                 Sepal.Length <= 6.6 (cutpoint_condition)
-#>                                     Sepal.Length <= 6.5 (cutpoint_condition)
-#>                                         Sepal.Length <= 6.1 (cutpoint_condition)
-#>                                             Sepal.Length <= 6 (cutpoint_condition)
-#>                                                 virginica (mode, n=1)
-#>                                                 versicolor (mode, n=2)
-#>                                             virginica (mode, n=3)
-#>                                         versicolor (mode, n=1)
-#>                                     versicolor (mode, n=2)
-#>                                 virginica (mode, n=5)
-#>                         Sepal.Length <= 6.4 (cutpoint_condition)
-#>                             virginica (mode, n=1)
-#>                             Sepal.Length <= 6.7 (cutpoint_condition)
-#>                                 versicolor (mode, n=3)
-#>                                 virginica (mode, n=3)
-#>                     Sepal.Length <= 6.4 (cutpoint_condition)
-#>                         versicolor (mode, n=3)
-#>                         Sepal.Length <= 6.5 (cutpoint_condition)
-#>                             virginica (mode, n=1)
-#>                             Sepal.Length <= 6.9 (cutpoint_condition)
-#>                                 virginica (mode, n=2)
-#>                                 versicolor (mode, n=2)
-#>                 Sepal.Length <= 6.3 (cutpoint_condition)
-#>                     versicolor (mode, n=2)
-#>                     virginica (mode, n=2)
-#>     Sepal.Length <= 5.8 (cutpoint_condition)
-#>         setosa (mode, n=31)
-#>         Sepal.Width <= 3.4 (cutpoint_condition)
-#>             Sepal.Length <= 6 (cutpoint_condition)
-#>                 versicolor (mode, n=1)
-#>                 virginica (mode, n=2)
-#>             virginica (mode, n=3)
+#>     Sepal.Length <= 5 (cutpoint_condition)
+#>         setosa (mode, n=22)
+#>         versicolor (mode, n=91)
+#>     Sepal.Width <= 3.4 (cutpoint_condition)
+#>         setosa (mode, n=12)
+#>         setosa (mode, n=25)
 ```
 
 The fitted woods model may be used to classify the new data as follows:
@@ -298,13 +104,13 @@ The fitted woods model may be used to classify the new data as follows:
 predict(fit, iris)
 #>   [1] setosa     setosa     setosa     setosa     setosa     setosa    
 #>   [7] setosa     setosa     setosa     setosa     setosa     setosa    
-#>  [13] setosa     setosa     setosa     setosa     setosa     setosa    
-#>  [19] setosa     setosa     setosa     setosa     setosa     setosa    
+#>  [13] setosa     setosa     versicolor versicolor setosa     setosa    
+#>  [19] versicolor setosa     setosa     setosa     setosa     setosa    
 #>  [25] setosa     setosa     setosa     setosa     setosa     setosa    
 #>  [31] setosa     setosa     setosa     setosa     setosa     setosa    
-#>  [37] setosa     setosa     setosa     setosa     setosa     setosa    
+#>  [37] setosa     setosa     setosa     setosa     setosa     versicolor
 #>  [43] setosa     setosa     setosa     setosa     setosa     setosa    
-#>  [49] setosa     setosa     versicolor versicolor virginica  versicolor
+#>  [49] setosa     setosa     virginica  versicolor virginica  versicolor
 #>  [55] versicolor versicolor versicolor versicolor versicolor versicolor
 #>  [61] versicolor versicolor versicolor versicolor versicolor versicolor
 #>  [67] versicolor versicolor versicolor versicolor versicolor versicolor
@@ -313,14 +119,14 @@ predict(fit, iris)
 #>  [85] setosa     versicolor versicolor versicolor versicolor versicolor
 #>  [91] versicolor versicolor versicolor versicolor versicolor versicolor
 #>  [97] versicolor versicolor versicolor versicolor versicolor versicolor
-#> [103] virginica  versicolor virginica  virginica  virginica  virginica 
-#> [109] virginica  virginica  virginica  virginica  virginica  virginica 
-#> [115] virginica  versicolor virginica  virginica  virginica  versicolor
-#> [121] virginica  virginica  virginica  virginica  virginica  virginica 
-#> [127] virginica  versicolor virginica  virginica  virginica  virginica 
-#> [133] virginica  virginica  virginica  virginica  virginica  versicolor
-#> [139] virginica  virginica  versicolor virginica  versicolor virginica 
-#> [145] virginica  versicolor versicolor virginica  virginica  versicolor
+#> [103] virginica  versicolor versicolor virginica  versicolor virginica 
+#> [109] versicolor virginica  versicolor versicolor versicolor versicolor
+#> [115] versicolor versicolor versicolor virginica  virginica  versicolor
+#> [121] virginica  versicolor virginica  versicolor versicolor virginica 
+#> [127] versicolor versicolor versicolor virginica  virginica  virginica 
+#> [133] versicolor versicolor versicolor virginica  versicolor versicolor
+#> [139] versicolor virginica  versicolor virginica  versicolor versicolor
+#> [145] versicolor versicolor versicolor versicolor versicolor versicolor
 #> Levels: setosa versicolor virginica
 ```
 
@@ -336,7 +142,7 @@ library(doParallel)
 #> Loading required package: parallel
 
 set.seed(335)
-cl <- makePSOCKcluster(32)
+cl <- makePSOCKcluster(24)
 registerDoParallel(cl)
 
 # setup the cross-validation parameters
@@ -386,7 +192,7 @@ print(woodsFit)
 #> 
 #>   resample_rows  mtry  Accuracy   Kappa
 #>   FALSE          2     0.9586667  0.938
-#>   FALSE          3     0.9613333  0.942
+#>   FALSE          3     0.9600000  0.940
 #>   FALSE          4     0.9586667  0.938
 #>   FALSE          5     0.9560000  0.934
 #>    TRUE          2     0.9573333  0.936
