@@ -6,9 +6,6 @@
 \usage{
 igr_by_indices(x, indices)
 }
-\value{
-
-}
 \description{
 Compute the Information Gain Ratio (IGR)
 }

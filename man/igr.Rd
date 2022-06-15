@@ -6,9 +6,6 @@
 \usage{
 igr(x1, x2)
 }
-\value{
-
-}
 \description{
 Compute the Information Gain Ratio (IGR)
 }

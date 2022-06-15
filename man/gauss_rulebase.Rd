@@ -16,8 +16,10 @@ input $i$ and part $j$
 - stdevs - an $(n_inputs, n_parts)$ matrix of the $\sigma$ parameters of the Gauss distribution,
 for input $i$ and part $j$
 - antecedents - an $(k, n_inputs)$ matrix of combinations of parts assigned to inputs
-- consequents - an $(n_inputs + 1, k)$ matrix of linear function\preformatted{Here $k = n_parts^\{n_inputs\}$ stands for the number of rules in the rulebase.
-}
+- consequents - an $(n_inputs + 1, k)$ matrix of linear function
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Here $k = n_parts^\{n_inputs\}$ stands for the number of rules in the rulebase.
+}\if{html}{\out{</div>}}
 }
 \description{
 Create the empty Gauss rulebase

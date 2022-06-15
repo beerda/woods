@@ -12,7 +12,8 @@
   max_height = NA,
   node_size = if (is.factor(y)) 1 else 5,
   resample_rows = TRUE,
-  principal_components = TRUE
+  principal_component = TRUE,
+  linear_model = TRUE
 )
 }
 \value{

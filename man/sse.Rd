@@ -6,9 +6,6 @@
 \usage{
 sse(x)
 }
-\value{
-
-}
 \description{
 Compute Sum of Squared Error (SSE)
 }

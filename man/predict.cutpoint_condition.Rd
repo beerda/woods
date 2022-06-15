@@ -6,9 +6,6 @@
 \usage{
 \method{predict}{cutpoint_condition}(object, newdata, ...)
 }
-\value{
-
-}
 \description{
 Returns vector of logical values indicating satisfiability of the condition in data rows
 }
