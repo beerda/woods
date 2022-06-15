@@ -65,3 +65,13 @@ is.woods_data <- function(x) {
 
     x
 }
+
+
+#' @export
+as.data.frame.woods_data <- function(x, ...) {
+    res <- x$x
+    colnames(res) <- paste0('x.', colnames(res))
+    res$y <- x$y
+
+    res
+}

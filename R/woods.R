@@ -57,13 +57,15 @@ woods.default <- function(y,
                           max_height = NA,
                           node_size = if (is.factor(y)) 1 else 5,
                           resample_rows = TRUE,
-                          principal_components = TRUE) {
+                          principal_component = TRUE,
+                          linear_model = TRUE) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
     assert_that(is.na(max_height) || is.count(max_height))
     assert_that(is.count(node_size))
-    assert_that(is.flag(principal_components))
+    assert_that(is.flag(principal_component))
+    assert_that(is.flag(linear_model))
 
     data <- woods_data(y = y, x = x)
 
@@ -85,8 +87,11 @@ woods.default <- function(y,
                                    cols = mtry)
 
     transformations <- list()
-    if (principal_components) {
-        transformations$..PC.. = function(x) prcomp(x, center = TRUE, scale. = TRUE, rank. = 1)
+    if (principal_component) {
+        transformations$..PC.. = pc_transform
+    }
+    if (linear_model) {
+        transformations$..LM.. = lm_transform
     }
 
     cfg <- list(max_height = max_height,

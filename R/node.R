@@ -62,10 +62,7 @@ leaf <- function(data, cfg) {
 
 
 create_transformation_fits <- function(transformations, data) {
-    res <- lapply(transformations, function(f) {
-        res <- try(f(data$x), silent = TRUE)
-        if (inherits(res, 'try-error')) NULL else res
-    })
+    res <- lapply(transformations, function(f) f(data))
 
     res[lengths(res) > 0]
 }
@@ -76,7 +73,7 @@ transform_data <- function(fits, data) {
         return(data)
     }
 
-    preds <- lapply(fits, function(f) as.numeric(predict(f, data$x)))
+    preds <- lapply(fits, function(f) predict(f, data$x))
     data$x <- do.call(cbind, c(list(data$x), preds))
 
     data
