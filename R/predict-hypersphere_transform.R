@@ -3,10 +3,11 @@
 #' @author Michal Burda
 #' @export
 predict.hypersphere_transform <- function(obj, data) {
-    data <- data[, names(obj$medians), drop = FALSE]
-    res <- apply(data, 1, function(row) {
-        sum(((row - obj$medians) / obj$iqr)^2)
-    })
+    data <- data[, names(obj$scale_means), drop = FALSE]
+    xx <- lapply(seq_along(data), function(i) (data[[i]] - obj$scale_means[i]) / obj$scale_sds[i])
+    xx <- matrix(unlist(xx), ncol = length(xx))
 
-    sqrt(res)
+    apply(xx, 1, function(row) {
+        sum((row - obj$centroid)^2)
+    })
 }

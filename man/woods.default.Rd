@@ -13,7 +13,8 @@
   node_size = if (is.factor(y)) 1 else 5,
   resample_rows = TRUE,
   principal_component = TRUE,
-  linear_model = TRUE
+  linear_model = TRUE,
+  hypersphere = TRUE
 )
 }
 \value{
