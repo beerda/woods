@@ -49,6 +49,7 @@ node <- function(data, cfg) {
 
     structure(list(split = split_def,
                    transformation = transformation,
+                   n = length(data$y),
                    left = node(splitted$left, cfg),
                    right = node(splitted$right, cfg)),
               class = 'node')
@@ -56,7 +57,8 @@ node <- function(data, cfg) {
 
 
 leaf <- function(data, cfg) {
-    structure(list(result = cfg$create_result(data)),
+    structure(list(result = cfg$create_result(data),
+                   n = length(data$y)),
               class = c('node', 'leaf'))
 }
 
