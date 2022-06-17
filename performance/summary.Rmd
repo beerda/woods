@@ -1,0 +1,42 @@
+---
+title: "Woods"
+author: "Michal Burda"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(mbrtools)
+library(rmake)
+library(caret)
+
+#deps <- getParam('.depends')
+deps <- list.files('.', pattern = '^trained_.*rds')
+
+deps <- data.frame(rds = deps, deps = deps) %>%
+  separate('deps', c('trained', 'type', 'method', 'on', 'data'), sep='(_|\\.)') %>%
+  select(-trained, -on)
+  
+```
+
+```{r}
+#print(deps)
+```
+
+```{r, results='asis'}
+for (dataName in unique(deps$data)) {
+  cat('\n\n# ', dataName, '\n\n')
+  subdeps <- filter(deps, data == dataName)
+  for (i in seq_len(nrow(subdeps))) {
+    cat('\n\n## ', subdeps$method[i], '\n\n')
+    fit <- readRDS(subdeps$rds[i])
+    cat('```\n')
+    print(fit$results)
+    cat('```\n')
+  }
+}
+```
+
