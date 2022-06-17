@@ -1,11 +1,10 @@
-.miParameters <- data.frame(parameter = c('resample_rows', 'mtry'),
-                            class = c('logical', 'numeric'),
-                            label = c('resample_rows', 'mtry'))
+.miParameters <- data.frame(parameter = c('mtry'),
+                            class = c('numeric'),
+                            label = c('mtry'))
 
 
 .miGrid <- function(x, y, len = NULL, search = 'grid') {
-    expand.grid(resample_rows = c(FALSE, TRUE),
-                mtry = 2:5)
+    expand.grid(mtry = 2:5)
 }
 
 
@@ -13,8 +12,7 @@
     woods::woods(y = y,
                  x = as.data.frame(x),
                  n_tree = 500,
-                 mtry = param$mtry,
-                 resample_rows = param$resample_rows)
+                 mtry = param$mtry)
 }
 
 
