@@ -23,8 +23,12 @@ predict.node <- function(object, newdata, ...) {
         }
 
         res <- rep(NA, length(condition))
-        res[condition] <- predict(object$left, newdata[condition, ])
-        res[!condition] <- predict(object$right, newdata[!condition, ])
+        if (any(condition)) {
+            res[condition] <- predict(object$left, newdata[condition, , drop = FALSE])
+        }
+        if (any(!condition)) {
+            res[!condition] <- predict(object$right, newdata[!condition, , drop = FALSE])
+        }
     }
 
     res
