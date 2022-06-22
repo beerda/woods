@@ -14,7 +14,8 @@
   resample_rows = TRUE,
   principal_component = TRUE,
   linear_model = TRUE,
-  hypersphere = TRUE
+  hypersphere = TRUE,
+  f_transform = TRUE
 )
 }
 \value{

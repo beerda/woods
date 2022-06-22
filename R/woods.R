@@ -59,7 +59,8 @@ woods.default <- function(y,
                           resample_rows = TRUE,
                           principal_component = TRUE,
                           linear_model = TRUE,
-                          hypersphere = TRUE) {
+                          hypersphere = TRUE,
+                          f_transform = TRUE) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
@@ -68,6 +69,7 @@ woods.default <- function(y,
     assert_that(is.flag(principal_component))
     assert_that(is.flag(linear_model))
     assert_that(is.flag(hypersphere))
+    assert_that(is.flag(f_transform))
 
     data <- woods_data(y = y, x = x)
 
@@ -97,6 +99,9 @@ woods.default <- function(y,
     }
     if (hypersphere) {
         transformations$..HS.. = hypersphere_transform
+    }
+    if (f_transform) {
+        transformations$..FT.. = fuzzy_transform
     }
 
     cfg <- list(max_height = max_height,
