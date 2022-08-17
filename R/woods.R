@@ -57,10 +57,10 @@ woods.default <- function(y,
                           max_height = NA,
                           node_size = if (is.factor(y)) 1 else 5,
                           resample_rows = TRUE,
-                          principal_component = TRUE,
-                          linear_model = TRUE,
-                          hypersphere = TRUE,
-                          f_transform = TRUE) {
+                          principal_component = FALSE,
+                          linear_model = FALSE,
+                          hypersphere = FALSE,
+                          f_transform = FALSE) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
@@ -72,6 +72,11 @@ woods.default <- function(y,
     assert_that(is.flag(f_transform))
 
     data <- woods_data(y = y, x = x)
+
+    cat('Running woods with principal_component=', principal_component,
+        ' linear_model=', linear_model,
+        ' hypersphere=', hypersphere,
+        ' f_transform=', f_transform, '\n', sep='');
 
     if (is.numeric(data$y)) {
         find_best_split <- sse_condition
