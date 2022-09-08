@@ -56,7 +56,6 @@ woods.default <- function(y,
                           mtry = if (is.factor(y)) floor(sqrt(ncol(x))) else max(floor(ncol(x) / 3), 1),
                           max_height = NA,
                           node_size = if (is.factor(y)) 1 else 5,
-                          resample_rows = TRUE,
                           principal_component = FALSE,
                           linear_model = FALSE,
                           hypersphere = FALSE,
@@ -92,8 +91,8 @@ woods.default <- function(y,
         levels <- levels(data$y)
     }
 
-    resample <- resampling_factory(rows = if (resample_rows) identity else NULL,
-                                   cols = mtry)
+    tree_resampling <- resampling_factory(rows = identity, cols = NULL)
+    node_resampling <- resampling_factory(rows = NULL, cols = mtry)
 
     transformations <- list()
     if (principal_component) {
@@ -111,8 +110,8 @@ woods.default <- function(y,
 
     cfg <- list(max_height = max_height,
                 node_size = node_size,
-                prepare_tree_data = resample,
-                prepare_node_data = identity,
+                prepare_tree_data = tree_resampling,
+                prepare_node_data = node_resampling,
                 transformations = transformations,
                 find_best_split = find_best_split,
                 create_result = create_result)
