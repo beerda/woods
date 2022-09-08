@@ -10,7 +10,8 @@ resampling_factory(rows = NULL, cols = NULL)
 \item{rows}{either a NULL value indicating no resampling should be done at all,
 or a positive value indicating the required number of rows
 or a function that from a number of rows of input data computes the required number of
-rows to be selected}
+rows to be selected (i.e., identity function passed here causes the resampling with
+replacement of all data rows).}
 
 \item{cols}{either a NULL value indicating no resampling should be done at all,
 or a positive value indicating the required number of columns
