@@ -84,7 +84,7 @@ woods.default <- function(y,
         split_type <- 'sum of squared error'
         levels <- NULL
     } else {
-        find_best_split <- igr_condition
+        find_best_split <- gini_condition
         create_result <- mode_result
         leaf_type <- 'mode'
         split_type <- 'information gain'
