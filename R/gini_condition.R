@@ -12,10 +12,11 @@ gini_condition <- function(data, cfg) {
 
     # only 1 row in data?
     if (length(data$y) <= 1) {
-        return(cutpoint_condition(var = colnames(data$x)[1],
-                                  cutpoint =  data$x[[1]][1],
-                                  type = type,
-                                  criterion = 0))
+        return(NULL)
+    }
+
+    if (is_constant(data$y)) {
+        retun(NULL)
     }
 
     cutpoints <- lapply(colnames(data$x), function(var) {

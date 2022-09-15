@@ -54,3 +54,26 @@ test_that('gini_condition - repeated values', {
     expect_equal(res$criterion, expected[best])
     expect_equal(res$label, paste('x <=', x[best]))
 })
+
+
+test_that('gini_condition - repeated last', {
+    x <- c(1, 2, 4, 4, 4)
+    y <- factor(c(F, F, F, T, T))
+
+    res <- gini_condition(woods_data(y = y, x = data.frame(x = x)),
+                          list())
+
+    expected <- c(gini(0, 1, 2, 4),
+                  gini(0, 2, 2, 3),
+                  gini(0, 2, 2, 3),
+                  gini(0, 2, 2, 3))
+    best <- which.min(expected)
+
+    expect_true(is.list(res))
+    expect_true(inherits(res, 'cutpoint_condition'))
+    expect_equal(res$var, 'x')
+    expect_equal(res$cutpoint, x[best])
+    expect_equal(res$type, 'gini')
+    expect_equal(res$criterion, expected[best])
+    expect_equal(res$label, paste('x <=', x[best]))
+})

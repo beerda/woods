@@ -29,10 +29,15 @@ List gini_split_numeric(NumericVector x, IntegerVector order, IntegerVector y, s
         rightSum += rightCount[i] * rightCount[i];
     }
 
+    long int lastIndex = y.size() - 1;
+    double lastValue = x[lastIndex];
+    while (lastIndex >= 0L && lastValue == x[lastIndex])
+        lastIndex--;
+
     double bestImpurity = 1;
     size_t bestIndex = 0;
 
-    for (long int i = 0; i < order.size() - 1; ++i) {
+    for (long int i = 0; i <= lastIndex; ++i) {
         int yval = y[order[i]];
 
         size_t prevLeft = 0;
@@ -53,7 +58,8 @@ List gini_split_numeric(NumericVector x, IntegerVector order, IntegerVector y, s
 
         double impurity = ((1 - leftGini) * leftN + (1 - rightGini) * rightN) / (leftN + rightN);
 
-        if (i >= order.size() - 2 || x[order[i]] != x[order[i + 1]]) {
+        if (i >= lastIndex || x[order[i]] != x[order[i + 1]]) {
+            // std::cout << i << ": " << impurity << "\n";
             if (impurity < bestImpurity || (impurity == bestImpurity && rand() % 2 == 0)) {
                 bestImpurity = impurity;
                 bestIndex = i;
