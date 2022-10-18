@@ -3,8 +3,8 @@
 #' @author Michal Burda
 #' @export
 #' @import lfl
-fuzzy_transform <- function(data) {
-    partitions <- 2
+fuzzy_transform <- function(data, cfg) {
+    partitions <- cfg$ft_partitions
 
     if (nrow(data$x) < partitions^ncol(data$x)) {
         return(NULL)

@@ -59,7 +59,8 @@ woods.default <- function(y,
                           principal_component = FALSE,
                           linear_model = FALSE,
                           hypersphere = FALSE,
-                          f_transform = FALSE) {
+                          f_transform = FALSE,
+                          ft_partitions = 2) {
     assert_that(is.atomic(y) && !is.null(y))
     assert_that(is.data.frame(x))
     assert_that(is.count(n_tree))
@@ -69,6 +70,8 @@ woods.default <- function(y,
     assert_that(is.flag(linear_model))
     assert_that(is.flag(hypersphere))
     assert_that(is.flag(f_transform))
+    assert_that(is.number(ft_partitions))
+    assert_that(ft_partitions >= 2)
 
     data <- woods_data(y = y, x = x)
 
@@ -114,7 +117,8 @@ woods.default <- function(y,
                 prepare_node_data = node_resampling,
                 transformations = transformations,
                 find_best_split = find_best_split,
-                create_result = create_result)
+                create_result = create_result,
+                ft_partitions = ft_partitions)
 
     model <- lapply(seq_len(n_tree), function(i) tree(data, cfg))
 

@@ -2,7 +2,7 @@
 #' @return
 #' @author Michal Burda
 #' @export
-lm_transform <- function(data) {
+lm_transform <- function(data, cfg) {
     family <- if (is.numeric(data$y)) gaussian() else binomial()
     data <- as.data.frame(data)
     fit <- suppressWarnings(glm(y ~ .,

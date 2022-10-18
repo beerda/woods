@@ -2,7 +2,7 @@
 #' @return
 #' @author Michal Burda
 #' @export
-pc_transform <- function(data) {
+pc_transform <- function(data, cfg) {
     fit <- try(prcomp(data$x, center = TRUE, scale. = TRUE, rank. = 1),
                silent = TRUE)
 

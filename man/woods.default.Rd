@@ -14,7 +14,8 @@
   principal_component = FALSE,
   linear_model = FALSE,
   hypersphere = FALSE,
-  f_transform = FALSE
+  f_transform = FALSE,
+  ft_partitions = 2
 )
 }
 \value{

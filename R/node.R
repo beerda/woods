@@ -22,7 +22,7 @@ node <- function(data, cfg) {
     }
 
     node_data <- cfg$prepare_node_data(data)
-    fits <- create_transformation_fits(cfg$transformations, node_data)
+    fits <- create_transformation_fits(cfg$transformations, node_data, cfg)
     node_data <- transform_data(fits, node_data)
     split_def <- cfg$find_best_split(node_data, cfg)
 
@@ -63,8 +63,8 @@ leaf <- function(data, cfg) {
 }
 
 
-create_transformation_fits <- function(transformations, data) {
-    res <- lapply(transformations, function(f) f(data))
+create_transformation_fits <- function(transformations, data, cfg) {
+    res <- lapply(transformations, function(f) f(data, cfg))
 
     res[lengths(res) > 0]
 }

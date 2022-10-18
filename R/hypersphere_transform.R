@@ -2,7 +2,7 @@
 #' @return
 #' @author Michal Burda
 #' @export
-hypersphere_transform <- function(data) {
+hypersphere_transform <- function(data, cfg) {
     if (nrow(data$x) < 5) {
         return(NULL)
     }
@@ -14,6 +14,10 @@ hypersphere_transform <- function(data) {
     }
     xx <- lapply(seq_along(data$x), function(i) (data$x[[i]] - means[i]) / sds[i])
     yy <- data$y
+
+    if (!is.factor(yy)) {
+        stop('only factor y is allowed in hypersphere_transform')
+    }
 
     centers <- lapply(xx, function(val) tapply(val, yy, mean))
     centmat <- matrix(unlist(centers), ncol=length(centers)) # columns are variables, rows are y's classes
