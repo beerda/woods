@@ -35,11 +35,10 @@ gini_condition <- function(data, cfg) {
     })
 
     gini <- sapply(cutpoints, function(res) res$gini)
-    values <- sapply(cutpoints, function(res) res$value)
     best <- which.min(gini)
 
     cutpoint_condition(var = colnames(data$x)[best],
-                       cutpoint = values[best],
+                       cutpoint = cutpoints[[best]]$value,
                        type = 'gini',
                        criterion = gini[best])
 }
