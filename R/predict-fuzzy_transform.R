@@ -8,5 +8,5 @@ predict.fuzzy_transform <- function(obj, data) {
     x <- as.matrix(x)
     xmemb <- fcut(x, breaks = obj$breaks)
 
-    predict(obj$fit, x, xmemb)
+    ftinv(obj$fit, x, xmemb)
 }
